@@ -1,0 +1,282 @@
+<LoginScreen>:
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols:1
+            padding:15,15
+            spacing:18,20
+            
+            Label:
+                text:"Daily Affirmations!"
+                font_size:'30sp'
+                font_name: 'Corbel'
+                color:0.1,0.7,1,1
+  
+
+                
+            TextInput:
+                id:uname
+                hint_text:"Username"
+                foreground_color: (0.1, 0.3, 0.7, 1)
+                background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+                
+                
+            TextInput:
+                id:pword
+                password:True
+                hint_text:"Password"
+                foreground_color: (0.1, 0.3, 0.7, 1)
+                foreground_color: (0.1, 0.3, 0.7, 1)
+                background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+                
+            RelativeLayout:
+                ImageButton:
+                    source:'login_img.png' if self.hovered else "login_img.png"
+                    on_press:root.login(root.ids.uname.text,root.ids.pword.text)
+                    size_hint:0.3,0.6
+                    color: 0,1,1,1
+                    pos_hint:{'center_x':0.5,'center_y':0.6}
+                    background_color:(1,1,1,0)
+                    font_size:'20sp'
+                    
+            Label:
+                id:login_wrong
+                text:""
+
+        GridLayout:
+            cols:2
+            size_hint:0.1,0.1
+            padding:0,0
+            spacing:0,0
+            Button:
+                text:"Sign Up"
+                background_color:1,1,1,0
+                opacity: 1 if self.state =='normal' else 0.5
+                color:0.1,0.7,1,1
+                on_press:root.sign_up()
+          
+                
+                
+                
+                
+                
+            Button:
+                text:"Forgot password"
+                background_color:1,1,1,0
+                opacity: 1 if self.state =='normal' else 0.5
+                color:0.1,0.7,1,1
+                on_press:root.forgot_password()
+                
+                
+                
+                
+
+<SignUpScreen>:
+    GridLayout:
+        cols:1
+        padding:50,50
+        spacing:30,30
+        RelativeLayout:
+            ImageButton:
+                on_press:root.log_out()
+                source:'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint:0.25,0.25
+                pos_hint:{'center_x':0.93,'center_y':0.8}
+        Label:
+            text:"Sign up For your daily dose of motivation !"
+            color: 1,1,1,1
+        TextInput:
+            id:username
+            hint_text:"Username"
+            foreground_color: (0.1, 0.3, 0.7, 1)
+            background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+        TextInput:
+            id:password
+            hint_text:"Password"
+            foreground_color: (0.1, 0.3, 0.7, 1)
+            background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+        Button:
+            text:"Submit"
+            on_press:root.add_user(root.ids.username.text,root.ids.password.text)
+            background_color:(1,1,1,0)
+            color: 1,1,1,1
+        Label:
+            id:noinput
+            color: 1,1,1,1
+            font_size:'15sp'
+            text:" "
+            text_size:self.width,None
+            size_hint_y: None
+            height:self.texture_size[1]    
+<ForgotPassword>:
+    GridLayout:
+        padding:50,50
+        spacing:30,30
+        cols:1
+        RelativeLayout:
+            ImageButton:
+                on_press:root.log_out()
+                source:'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint:0.25,0.25
+                pos_hint:{'center_x':0.93,'center_y':0.8}
+        Label:
+            text:"Try entering the Username"
+            color: 0,1,1,1
+
+        TextInput:
+            id:uname
+            hint_text:"Username"
+            foreground_color: (0.1, 0.3, 0.7, 1)
+            background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+        
+        Button:
+            text:"Submit"
+            on_press:root.check_user(root.ids.uname.text)
+            background_color:(0.1,0.7,1,1)
+            color: 0,1,1,1
+<ForgotPassSuccess>:
+    GridLayout:
+        cols:1
+        padding:15,15
+        spacing:18,20
+        RelativeLayout:
+            ImageButton:
+                on_press:root.log_out()
+                source:'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint:0.25,0.25
+                pos_hint:{'center_x':0.93,'center_y':0.8}
+        Label:
+            text:"Please enter the Username "
+        TextInput:
+            id:uname
+            hint_text:"username"
+            foreground_color: (0.1, 0.3, 0.7, 1)
+            background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+        Label:
+            id:newperson
+            text:""
+        Label:
+            text:"Please enter you email here!"
+        TextInput:
+            id:email_re
+            hint_text:"email"
+            foreground_color: (0.1, 0.3, 0.7, 1)
+            background_color: (0.1,0.1,0,0) if self.focus else (0.1,0.3,0.7,1)
+        Label:
+            text:"You will receive an Email with credentials.Thank you"
+        Button:
+            text:"Submit"
+            on_press:root.back_to_home(root.ids.email_re.text,root.ids.uname.text)
+            background_color:(0.1,0.7,1,1)
+            color: 0,1,1,1
+        Label:
+            id:mess
+            text:""
+<ForgotPassFail>:
+    GridLayout:
+        cols:1
+        Label:
+            text:" Looks like you are new here! Please Create a new account"
+            color: 0,1,1,1
+        Button:
+            text:"Sign Up Here"
+            on_press:root.new_sign_in()
+            background_color:(1,1,1,0)
+            color: 0,1,1,1
+
+<SignUpScreenSuccess>:
+    GridLayout:
+        padding:15,15
+        spacing:50,50
+        cols:1
+        Label:
+            text:"Account Created! Welcome to Daily Dose of Motivation"
+            font_size:'15sp'
+            text_size:self.width,None
+            size_hint_y: None
+            height:self.texture_size[1]  
+            
+        
+        Button:
+            text:"Login Here!" 
+            font_size:'20sp'
+            on_press:root.go_to_login() 
+            background_color:(0.1,0.7,1,1)
+            size_hint: 1,0.7 
+            text_size:self.width,None
+            size_hint_y: None
+            height:self.texture_size[1] 
+        
+  
+       
+            
+            
+<LoginScreenSuccess>:
+    GridLayout:
+        padding:15,15
+        spacing:18,20
+        cols:1
+        RelativeLayout:
+            ImageButton:
+                on_press:root.log_out()
+                source:'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint:0.25,0.25
+                pos_hint:{'center_x':0.93,'center_y':0.8}
+                
+      
+        RelativeLayout:    
+            Label:
+                text:"Motivate Yourself Today! Click below!!"
+                    
+                color: 1, 1, 1
+                size_hint:2,2
+                font_size:'15sp'
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                  
+        ImageButton:
+                
+            on_press:root.get_affirm()
+            source:'gooddd.png' if self.hovered else "day.png"
+            color: 1, 1, 1
+            size_hint:1,1
+            
+
+
+        ScrollView:
+            Label:
+                id:affirmation
+                text:""
+                text_size:self.width,None
+                size_hint_y: None
+                height:self.texture_size[1]    
+                
+            
+            
+
+        
+
+
+
+<RootWidget>:
+    LoginScreen:
+        name:"login_screen"
+    SignUpScreen:
+        name:"sign_up_screen"
+    ForgotPassword:
+        name:"forgot_password"
+    SignUpScreenSuccess:
+        name:"sign_up_page_success"
+    ForgotPassSuccess:
+        name:"forgotpasswordSuccessMessage"
+    ForgotPassFail:
+        name:"forgotpasswordFailedMessage"
+    LoginScreenSuccess:
+        name:"loginScreenSuccess"
+   
+   
+        
+        
+
+
+
